@@ -9,7 +9,7 @@ const Dashboard = () => {
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [users, setUsers] = useState([]);
-    
+
     const navigate = useNavigate();  
 
     useEffect(() => {
@@ -57,15 +57,38 @@ const Dashboard = () => {
         setUsers(response.data);
     }
 
+    const deleteUser = async (id) => {
+        try {
+            await axiosJWT.delete(`http://localhost:5000/users/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            getUsers();
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
+    };
+
+    const redirectToRegister = () => {
+        navigate('/register');
+    };
+
     return (
         <div className="container mt-5">
             <h1>Welcome Back: {name}</h1>
+
+            <div className="mb-4">
+                <button className="button is-primary" onClick={redirectToRegister}>Create User</button>
+            </div>
+
             <table className="table is-striped is-fullwidth">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,6 +97,13 @@ const Dashboard = () => {
                             <td>{index + 1}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
+                            <td>
+                                <button 
+                                    onClick={() => deleteUser(user.id)} 
+                                    className="button is-danger is-small">
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
