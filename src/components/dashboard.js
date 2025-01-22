@@ -74,6 +74,10 @@ const Dashboard = () => {
         navigate('/register');
     };
 
+    const redirectToEdit = (id) => { 
+        navigate(`/edit/${id}`);
+    };
+
     return (
         <div className="container mt-5">
             <h1>Welcome Back: {name}</h1>
@@ -100,8 +104,13 @@ const Dashboard = () => {
                             <td>
                                 <button 
                                     onClick={() => deleteUser(user.id)} 
-                                    className="button is-danger is-small">
+                                    className="button is-danger is-small mr-2">
                                     Delete
+                                </button>
+                                <button 
+                                    onClick={() => redirectToEdit(user.id)} 
+                                    className="button is-info is-small">
+                                    Edit
                                 </button>
                             </td>
                         </tr>

@@ -4,6 +4,7 @@ import Dashboard from './components/dashboard';
 import Login from './components/login';
 import Navbar from './components/navbar';
 import Register from './components/register';
+import UpdateUser from './components/update';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<><Navbar /><Dashboard /></>} />
+        <Route path="/edit/:id" element={<UpdateUser />} />
       </Routes>
     </BrowserRouter>
   );
