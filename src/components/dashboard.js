@@ -9,7 +9,7 @@ const Dashboard = () => {
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [users, setUsers] = useState([]);
-    
+
     const navigate = useNavigate();  
 
     useEffect(() => {
@@ -64,15 +64,24 @@ const Dashboard = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            getUsers(); 
+            getUsers();
         } catch (error) {
             console.error("Error deleting user:", error);
         }
     };
 
+    const redirectToRegister = () => {
+        navigate('/register');
+    };
+
     return (
         <div className="container mt-5">
             <h1>Welcome Back: {name}</h1>
+
+            <div className="mb-4">
+                <button className="button is-primary" onClick={redirectToRegister}>Create User</button>
+            </div>
+
             <table className="table is-striped is-fullwidth">
                 <thead>
                     <tr>
